@@ -23,16 +23,21 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request,['email' => 'required']);
+        $this->validate($request,['email' => 'required','role' => 'required']);
 
         $user = User::create([
             'name' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'hak_akses' => 'super-admin',
+            'hak_akses' => $request->role,
             'id_ig' => $request->akunig,
             ]);
-        $user->assignRole('super-admin');
+        if ($request->role=="super-admin"){
+            $user->assignRole('super-admin');
+        }else if($request->role=="user"){
+            $user->assignRole('user');
+        }
+        
         return redirect('/admin/user');
     }
     public function edit($id)

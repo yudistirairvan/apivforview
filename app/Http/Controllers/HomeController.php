@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
 use App\artikel;
 use App\ContactUS;
 use App\Subscriber;
@@ -26,12 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        // $jumlahartikel = artikel::where('publish', 1)->count();
-        // $jumlahpesan = ContactUS::all()->count();
-        // $jumlahsubscriber = Subscriber::where('status', 1)->count();
-        // $jumlahuser = User::all()->count();
-        // return view('home', ['artikel' => $jumlahartikel,'pesan' => $jumlahpesan,'subscribe' => $jumlahsubscriber,'user' => $jumlahuser]);
-        return view('home');
+        $hak_akses=Auth::user()->hak_akses;
+        if ($hak_akses=="user"){
+            return view('user');
+        }else if ($hak_akses=="super-admin"){
+            return view('home');
+        }
+    
     }
 }

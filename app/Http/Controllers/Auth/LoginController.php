@@ -65,6 +65,8 @@ class LoginController extends Controller
             if (auth()->user()->hak_akses == 'super-admin') {
                 // $user->assignRole('super-admin');
                 return redirect()->route('home');
+            }else if (auth()->user()->hak_akses == 'user'){
+                return redirect()->route('user');
             }else{
                 return redirect()->route('/');
             }

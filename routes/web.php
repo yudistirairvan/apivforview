@@ -104,7 +104,28 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'role:super-admin']],
 
 });
 
+Route::group(['prefix' => 'user','middleware' => ['auth', 'role:user']],function() {
+    // Route::get('/', function(){
 
+    //     return redirect('dashboard');
+    // });
+
+
+    Route::get('/', 'DashboardController@index');
+    
+
+
+    Route::get('user','UserController@index');
+    Route::get('user/tambah','UserController@tambah');
+    Route::post('user/store','UserController@store');
+    Route::get('user/delete/{id}','UserController@delete');
+    Route::get('user/edit/{id}','UserController@edit');
+    Route::put('user/update/{id}','UserController@update');
+
+    
+
+
+});
 
 /**
  * Router Binding
@@ -116,5 +137,27 @@ Route::get('covid-19', 'CovidController@index');
 
 
 Auth::routes();
+Route::group(['prefix' => 'user','middleware' => ['auth', 'role:user']],function() {
+    // Route::get('/', function(){
 
+    //     return redirect('dashboard');
+    // });
+
+
+    Route::get('/', 'DashboardController@index');
+    
+
+
+    Route::get('user','UserController@index');
+    Route::get('user/tambah','UserController@tambah');
+    Route::post('user/store','UserController@store');
+    Route::get('user/delete/{id}','UserController@delete');
+    Route::get('user/edit/{id}','UserController@edit');
+    Route::put('user/update/{id}','UserController@update');
+
+    
+
+
+});
+Route::get('/user', 'HomeController@index')->name('user');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -55,6 +55,18 @@
                      <select>
                   </div>
                 </div>
+                <div class="card-body">
+                <div class="form-group">
+                    <label for="role">Role</label>
+
+                    <select name="role" class="form-control">
+                    
+                      <option value="user">User</option>
+                      <option value="super-admin">Super Admin</option>
+             
+                     <select>
+                  </div>
+                </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
