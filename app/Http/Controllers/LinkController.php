@@ -56,8 +56,18 @@ class LinkController extends Controller
     }
     public function edit($id)
     {
+        $idu = Auth::user()->id;
+        $user = DB::table('users')
+        ->join('profiles','users.id', '=', 'profiles.IdUser')
+        ->select(
+            'users.name',
+            'profiles.Saldo',
+            'profiles.LastName'
+        )
+        ->where('IdUser', $idu)
+        ->get();
         $link = link::find($id);
-        return view('user.link_edit', ['link' => $link]);
+        return view('user.link_edit', ['link' => $link,'user' => $user]);
     }
     public function update($id, Request $request)
     {

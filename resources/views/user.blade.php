@@ -30,7 +30,7 @@
               <div class="inner">
                 <h3> My Links </h3>
 
-                <p></p>
+                <p>Click more info For Detail</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person"></i>
@@ -45,12 +45,12 @@
               <div class="inner">
                 <h3>Log</h3>
 
-                <p></p>
+                <p>Click more info For Detail</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person"></i>
               </div>
-              <a href="log" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/user/log" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
 <!-- ./col -->

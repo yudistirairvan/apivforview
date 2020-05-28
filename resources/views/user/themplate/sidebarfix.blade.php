@@ -50,6 +50,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="/user/view" class="nav-link @yield('menulog')">
+                <i class="fab fa-youtube"></i>
+                <p>
+                    Get Coin
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/user/log" class="nav-link @yield('menulog')">
                 <i class="fab fa-instagram"></i>
                 <p>
@@ -57,7 +65,7 @@
                 </p>
                 </a>
             </li>
-
+            
             <!-- <li class="nav-item has-treeview @yield('menupembukuan') ">
             <a href="#" class="nav-link @yield('menupembukuan')">
               <i class="nav-icon fas fa-tachometer-alt"></i>
