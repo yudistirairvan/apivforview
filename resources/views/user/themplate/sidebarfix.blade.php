@@ -4,7 +4,7 @@
     <a href="/user/dashboard" class="brand-link">
       <img src="@yield('logo')" alt="adminlte Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">SIP</span>
+      <span class="brand-text font-weight-light">View for View</span>
     </a>
 
     <!-- Sidebar -->
@@ -15,7 +15,7 @@
           <img src="@yield('profile')" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">User</a>
+          <a href="/user/profile" class="d-block">{{ $user[0]->name }} {{ $user[0]->LastName }}</a>
         </div>
       </div>
 
@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="/user/dashboard" class="nav-link @yield('menudashboard')">
+                <a href="/user" class="nav-link @yield('menudashboard')">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard

@@ -105,25 +105,24 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'role:super-admin']],
 });
 
 Route::group(['prefix' => 'user','middleware' => ['auth', 'role:user']],function() {
-    // Route::get('/', function(){
 
-    //     return redirect('dashboard');
-    // });
+    Route::get('/', function(){
 
+        return redirect('dashboard');
+    });
+    Route::get('/dashboard', 'DashboardController@user');
 
-    Route::get('/', 'DashboardController@index');
-    
+    Route::get('link','LinkController@index');
+    Route::get('link/tambah','LinkController@tambah');
+    Route::post('link/store','LinkController@store');
+    Route::get('link/delete/{id}','LinkController@delete');
+    Route::get('link/edit/{id}','LinkController@edit');
+    Route::put('link/update/{id}','LinkController@update');
 
-
-    Route::get('user','UserController@index');
-    Route::get('user/tambah','UserController@tambah');
-    Route::post('user/store','UserController@store');
-    Route::get('user/delete/{id}','UserController@delete');
-    Route::get('user/edit/{id}','UserController@edit');
-    Route::put('user/update/{id}','UserController@update');
-
-    
-
+    Route::get('profile','ProfileController@index');
+    Route::get('myprofile','ProfileController@myprofile');
+    Route::get('profile/edit','ProfileController@edit');
+    Route::put('profile/update/{id}','ProfileController@update');
 
 });
 
@@ -137,27 +136,9 @@ Route::get('covid-19', 'CovidController@index');
 
 
 Auth::routes();
-Route::group(['prefix' => 'user','middleware' => ['auth', 'role:user']],function() {
-    // Route::get('/', function(){
 
-    //     return redirect('dashboard');
-    // });
+Route::get('/user', function(){
 
-
-    Route::get('/', 'DashboardController@index');
-    
-
-
-    Route::get('user','UserController@index');
-    Route::get('user/tambah','UserController@tambah');
-    Route::post('user/store','UserController@store');
-    Route::get('user/delete/{id}','UserController@delete');
-    Route::get('user/edit/{id}','UserController@edit');
-    Route::put('user/update/{id}','UserController@update');
-
-    
-
-
-});
-Route::get('/user', 'HomeController@index')->name('user');
+    return redirect('/user/dashboard');
+})->name('user');
 Route::get('/home', 'HomeController@index')->name('home');

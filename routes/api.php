@@ -22,3 +22,4 @@ use Illuminate\Http\Request;
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 Route::get('artikel', 'API\ArtikelController@index');
+
