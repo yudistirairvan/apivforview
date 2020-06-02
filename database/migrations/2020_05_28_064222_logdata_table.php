@@ -13,9 +13,21 @@ class LogdataTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('logdatas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('Person');
+            $table->string('IdLink');
+            $table->string('LogType');
+            $table->string('Gate');
+            $table->string('SaldoAwal');
+            $table->string('Credit');
+            $table->string('Debit');
+            $table->string('SaldoAkhir');
+            $table->string('Status');
+            $table->timestamps();
+        });
     }
-
+        
     /**
      * Reverse the migrations.
      *
@@ -23,6 +35,6 @@ class LogdataTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('logdatas');
     }
 }

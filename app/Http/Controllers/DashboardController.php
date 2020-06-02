@@ -34,7 +34,8 @@ class DashboardController extends Controller
         ->select(
             'users.name',
             'profiles.Saldo',
-            'profiles.LastName'
+            'profiles.LastName',
+            'profiles.Picture'
         )
         ->where('IdUser', $id)
         ->get();

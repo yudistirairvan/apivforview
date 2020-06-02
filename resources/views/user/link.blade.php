@@ -17,8 +17,13 @@
 <div class="card-body">
     <div class="row mb-2">
         <div class="col-sm-2 p-2">
-        <a href="/user/link/tambah"><button type="button" class="btn btn-block bg-gradient-primary btn-lg">Tambah Link </button></a>
+        <a href="/user/link/tambah" ><button type="button" class="btn btn-block bg-gradient-primary btn-lg" 
+        @if ($user[0]->Saldo<6)
+        disabled data-toggle="tooltip" title="Silahkan Tambahkan Saldo anda Dengan Menonton video yang tersedia"
+        @endif
+        >Tambah Link</button></a>
         </div>
+        
 
     </div>
     

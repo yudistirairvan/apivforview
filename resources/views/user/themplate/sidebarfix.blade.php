@@ -12,10 +12,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="@yield('profile')" class="img-circle elevation-2" alt="User Image">
+          <img src="../../images/users/{{ $user[0]->Picture }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/user/profile" class="d-block">{{ $user[0]->name }} {{ $user[0]->LastName }}</a>
+          <a href="/user/profile" class="d-block">{{ $user[0]->name ?? '' }} {{ $user[0]->LastName ?? '' }}</a>
         </div>
       </div>
 
@@ -50,21 +50,22 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/user/view" class="nav-link @yield('menulog')">
+                <a href="/user/view" class="nav-link @yield('menugetcoin')">
                 <i class="fab fa-youtube"></i>
                 <p>
                     Get Coin
                 </p>
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="/user/log" class="nav-link @yield('menulog')">
-                <i class="fab fa-instagram"></i>
+                
+                <i class="fas fa-list"></i>
                 <p>
                     Log
                 </p>
                 </a>
-            </li>
+            </li> -->
             
             <!-- <li class="nav-item has-treeview @yield('menupembukuan') ">
             <a href="#" class="nav-link @yield('menupembukuan')">

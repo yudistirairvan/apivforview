@@ -12,9 +12,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>Saldo</h3>
+                <h3> {{ $user[0]->Saldo ?? '' }} </h4> 
 
-                <p> {{ $user[0]->Saldo }} </p>
+                <p>Saldo ( Menit ) </p>
               </div>
               <div class="icon">
                 <i class="ion ion-bitcoin"></i>

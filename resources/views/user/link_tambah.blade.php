@@ -44,7 +44,11 @@
                     <select name="waktu" class="form-control">
                     
                       <option value="5">5 Menit</option>
+                      @if ($user[0]->Saldo>10)
                       <option value="10">10 Menit</option>
+                      @endif
+
+                     
              
                      <select>
                   </div>

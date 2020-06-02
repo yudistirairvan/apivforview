@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Link;
+use App\Profile;
+use App\LogData;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -11,17 +13,25 @@ class LinkController extends Controller
 {
     public function index()
     {
+        //get id user yang login
         $id = Auth::user()->id;
+        //get profile
         $user = DB::table('users')
         ->join('profiles','users.id', '=', 'profiles.IdUser')
         ->select(
             'users.name',
             'profiles.Saldo',
-            'profiles.LastName'
+            'profiles.LastName',
+            'profiles.Picture'
         )
         ->where('IdUser', $id)
         ->get();
-        $link = Link::all();
+
+        //get all link by user ID 
+        $link = DB::table('links')
+        ->where('IdUser', $id)
+        ->orderByDesc('id')
+        ->get();
         return view('user.link', ['link' => $link, 'user' => $user]);
     }
     public function tambah()
@@ -32,25 +42,62 @@ class LinkController extends Controller
         ->select(
             'users.name',
             'profiles.Saldo',
-            'profiles.LastName'
+            'profiles.LastName',
+            'profiles.Picture'
         )
         ->where('IdUser', $id)
         ->get();
-        return view('user.link_tambah', ['user' => $user]);
+        if ($user[0]->Saldo<6){
+            //jika saldo dibawah 6 maka redirect ke halaman view
+            return redirect('/user/view');
+        }else{
+            return view('user.link_tambah', ['user' => $user]);
+        }
+
+        
     }
 
     public function store(Request $request)
     {
+        //get id user yang login
         $id = Auth::user()->id;
+        //validasi harus input field link
         $this->validate($request,['link' => 'required']);
-
-        link::create([
+        //get saldo user
+        $user = DB::table('users')
+        ->join('profiles','users.id', '=', 'profiles.IdUser')
+        ->select('profiles.Saldo')
+        ->where('IdUser', $id)
+        ->get();
+        //input data link
+        $inputlink = link::create([
             'IdUser' => $id,
             'Judul' => $request->judul,
             'Link' => $request->link,
             'Waktu' => $request->waktu,
             'Status' => 'Aktif',
             ]);
+        //input log    
+        LogData::create([
+            'Person' => $id,
+            'IdLink' => $inputlink->id,
+            'LogType' => 'Add Link',
+            'Gate' => 'Web',
+            'SaldoAwal' => $user[0]->Saldo,
+            'Credit' => $request->waktu,
+            'Debit' => '0',
+            'SaldoAkhir' => $user[0]->Saldo-$request->waktu,
+            'Status' => '1',
+        ]);
+        //get profile id untuk update saldo
+        $profile = Profile::where([
+            ['IdUser', $id ]
+        ])->limit(1)->get();
+        $profileid=$profile[0]->id;
+        //update Saldo
+        $profile = Profile::find($profileid);
+        $profile->Saldo=$user[0]->Saldo-$request->waktu;
+        $profile->save();
 
         return redirect('/user/link');
     }
@@ -62,7 +109,9 @@ class LinkController extends Controller
         ->select(
             'users.name',
             'profiles.Saldo',
-            'profiles.LastName'
+            'profiles.LastName',
+            'profiles.Picture'
+
         )
         ->where('IdUser', $idu)
         ->get();
@@ -85,5 +134,10 @@ class LinkController extends Controller
         $link->delete();
         return redirect('/user/link');
     }
-
+    public function deletemyvideo($id)
+    {
+        $link = link::find($id);
+        $link->delete();
+        return redirect('/user/myprofile');
+    }
 }

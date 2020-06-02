@@ -2,7 +2,6 @@
 
 @section('title', 'Profile')
 @section('logo', '../../assets/adminlte/dist/img/AdminLTELogo.png')
-@section('profile', '../../assets/adminlte/dist/img/user2-160x160.jpg')
 @section('menu', 'Profile')
 @section('menudashboard', ' ')
 @section('menuuser', 'menu active')
@@ -18,7 +17,7 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" src="../../assets/adminlte/dist/img/user4-128x128.jpg" alt="User profile picture">
+                  <img class="profile-user-img img-fluid img-circle" src="../../images/users/{{ $user[0]->Picture }}" alt="User profile picture">
                 </div>
 
                 <h3 class="profile-username text-center">{{ $user[0]->name }} {{ $user[0]->LastName }}</h3>
@@ -34,8 +33,8 @@
                   </li>
                  
                 </ul>
-
-                <a href="#" class="btn btn-primary btn-block"><b>Add  More Saldo</b></a>
+                <a href="/user/profile/editfoto" class="btn btn-primary btn-block"><b>Edit Foto</b></a>
+                <a href="/user/view" class="btn btn-primary btn-block"><b>Add  More Saldo</b></a>
               </div>
               <!-- /.card-body -->
             </div>
@@ -82,18 +81,18 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                  <!-- <li class="nav-item"><a class="nav-link " href="#activity" data-toggle="tab">Activity</a></li> -->
+                  <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Timeline</a></li>
                   <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
-                  <div class="tab-pane active" id="activity">
+                  <div class="tab-pane " id="activity">
                     <!-- Post -->
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../assets/adminlte/img/user1-128x128.jpg" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="./../images/users/{{ $user[0]->Picture }}" alt="user image">
                         <span class="username">
                           <a href="#">Jonathan Burke Jr.</a>
                           <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
@@ -203,95 +202,51 @@
                     <!-- /.post -->
                   </div>
                   <!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
-                    <!-- The timeline -->
-                    <div class="timeline timeline-inverse">
+                  <div class="tab-pane active" id="timeline">
+                  <!-- The timeline -->
+                  <div class="timeline timeline-inverse">
+
+                  @foreach($links as $linkdata)
+                    @php
+                    $date = $linkdata->created_at;
+                    $confert = substr($date , 0, 10);
+                    $time = substr($date , 10, 10);
+                    @endphp
+
+                      
                       <!-- timeline time label -->
                       <div class="time-label">
                         <span class="bg-danger">
-                          10 Feb. 2014
+                          {{ $confert }}
                         </span>
                       </div>
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
                       <div>
-                        <i class="fas fa-envelope bg-primary"></i>
+                        <i class="fas fa-video bg-primary"></i>
 
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
+                          <span class="time"><i class="far fa-clock"></i> {{ $time }}</span>
 
-                          <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                          <h3 class="timeline-header"><a href="#">Post A link</a> Duration {{ $linkdata->Waktu }}</h3>
 
                           <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
+                            Your Video {{ $linkdata->Judul }} 
                           </div>
                           <div class="timeline-footer">
-                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="/user/video/{{ $linkdata->id }}" class="btn btn-primary btn-sm">Check The Video</a>
+                            <a href="/user/myprofile/delete/{{ $linkdata->id }}" class="btn btn-danger btn-sm">Delete</a>
                           </div>
                         </div>
                       </div>
                       <!-- END timeline item -->
                       <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
+                  @endforeach
 
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
 
-                          <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                          </h3>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-comments bg-warning"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                          <div class="timeline-body">
-                            Take me to your leader!
-                            Switzerland is small and neutral!
-                            We are more like Germany, ambitious and misunderstood!
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-success">
-                          3 Jan. 2014
-                        </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
+                    
+                      
+                      
                       <div>
                         <i class="far fa-clock bg-gray"></i>
                       </div>
@@ -300,38 +255,59 @@
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" action="/user/profile/update/user/{{ $user[0]->id }}">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <label for="name" class="col-sm-2 col-form-label" >First Name</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                          <input id="name" name="name" type="text" class="form-control"  placeholder="First Name" value="{{ $user[0]->name }}">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                        <label for="lastname" class="col-sm-2 col-form-label" >Last Name</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                          <input id="lastname" name="lastname" type="text" class="form-control"  placeholder="First Name" value="{{ $user[0]->LastName }}">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                          <input type="email" class="form-control" id="inputEmail" placeholder="Email" disabled value="{{ $user[0]->email }}">
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                        </div>
+                      
+                    <div class="form-group row">
+                      <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="+62822xxx" value="{{ $user[0]->Phone }}">
                       </div>
-                      <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                        </div>
+                    </div>
+
+                
+                    <div class="form-group row">
+                      <label for="channel" class="col-sm-2 col-form-label">Channel Youtube</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="channel" name="channel" placeholder="https://www.youtube.com/yudistirairvanpriyambudi" value="{{ $user[0]->Chanellink }}">
                       </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
+                        <label for="instagram" class="col-sm-2 col-form-label">Instagram</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Judul Video Mu" value="{{ $user[0]->Instagramlink }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fb" class="col-sm-2 col-form-label">Facebook</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="fb" name="fb" placeholder="Judul Video Mu" value="{{ $user[0]->facebooklink }}">
+                      </div>
+                    </div>
+
+
+
+                     
+                      <!-- <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                           <div class="checkbox">
                             <label>
@@ -339,7 +315,8 @@
                             </label>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
+
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                           <button type="submit" class="btn btn-danger">Submit</button>

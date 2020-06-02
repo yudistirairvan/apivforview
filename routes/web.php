@@ -121,8 +121,17 @@ Route::group(['prefix' => 'user','middleware' => ['auth', 'role:user']],function
 
     Route::get('profile','ProfileController@index');
     Route::get('myprofile','ProfileController@myprofile');
+    Route::get('myprofile/delete/{id}','LinkController@deletemyvideo');
     Route::get('profile/edit','ProfileController@edit');
+    Route::get('profile/editfoto','ProfileController@editfoto');
+    Route::put('profile/update/foto','ProfileController@updatefoto');
     Route::put('profile/update/{id}','ProfileController@update');
+    Route::put('profile/update/user/{id}','ProfileController@updateuser');
+
+    Route::get('view','ViewController@index');
+    Route::get('play/{id}','ViewController@play');
+    Route::get('video/{id}','ViewController@myvideo');
+
 
 });
 
